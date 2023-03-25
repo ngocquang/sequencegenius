@@ -2,6 +2,8 @@
 
 Effortlessly generate sequence diagram from your ideas, with helps from AI.
 
+Try it online at: https://seq.ascii-draw.com/
+
 ![](./metadata/screenshot.png)
 
 ## How to use
