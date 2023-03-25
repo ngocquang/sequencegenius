@@ -19,6 +19,7 @@ export default function Home() {
     const [content, setContent] = useState('');
     const [diagram, setDiagram] = useState(``);
     const [loading, setLoading] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     mermaid.initialize({
         startOnLoad: true,
@@ -71,6 +72,16 @@ export default function Home() {
         setContent(EXAMPLES[randomIndex]);
     }
 
+    const copyBtnHandler = async () => {
+        try {
+            await navigator.clipboard.writeText(diagram)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 500)
+        } catch (err) {
+            console.error('Failed to copy: ', err)
+        }
+    }
+
     return (
         <div className={"flex flex-col h-screen"}>
             <Head>
@@ -96,11 +107,34 @@ export default function Home() {
                     <button onClick={randomBtnHandler} className="py-2 px-5 bg-slate-50 border border-slate-300 text-slate-700 text-sm rounded-md shadow-lg shadow-slate-300/50 focus:outline-none">Random example</button>
                     <button onClick={generateBtnHandler} className="py-2 px-5 bg-blue-500 text-white text-sm font-semibold rounded-md shadow-lg shadow-blue-500/50 focus:outline-none">Generate diagram</button>
                 </div>
-                <div className='w-full min-h-[500px] border border-slate-200 rounded-md bg-white flex items-center justify-center'>
+                <div className='relative w-full min-h-[500px] border border-slate-200 rounded-md bg-white flex items-center justify-center'>
                     {loading ? "Loading..." : (
                         diagram.length > 0 ? "" : "Tell me what's in your mind and click Generate to create diagram"
                     )}
                     <div ref={ref} className={`mermaid ${diagram.length === 0 ? "hidden" : "w-full h-full flex justify-center items-center"}`}>{diagram}</div>
+                    <div className="absolute top-2 right-2">
+                        <button
+                            onClick={copyBtnHandler}
+                            className={`p-1.5 bg-slate-50 border border-slate-300 text-sm rounded-md shadow-lg shadow-slate-300/50 focus:outline-none ${
+                                diagram.length === 0 ?  'text-slate-300 cursor-not-allowed' : 'text-slate-700 cursor-pointer'
+                            }`}
+                            disabled={diagram.length === 0 || loading}
+                            aria-label="Copy Button"
+                        >
+                          {copied ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M5 12l5 5l10 -10"></path>
+                            </svg>
+                          ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+                            </svg>
+                          )}
+                        </button>
+                    </div>
                 </div>
             </main>
             <footer className={"w-full mx-auto my-4 font-sans text-center text-sm text-slate-700 py-4"}>
