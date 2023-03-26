@@ -6,12 +6,12 @@ import mermaid from "mermaid";
 
 const EXAMPLES = [
     "Mommy gives Alice X dollars. If X is larger than $50, Alice goes to the movie. Otherwise, Alice gives it to Bob. Whenever Bob gets the money, Bob go tells Mommy.",
-    "The user goes to the landing page and submits an email address. Auth Server receives the email address, save it to the database, and also sends a request to Content Server. The content Server returns the data to the user.",
-    "A customer orders online, the website forwards the info to the nearest store, employee fulfills order and a delivery person delivers to the customer's doorstep.",
-    "A customer selects items to purchase, adds to cart, proceeds to checkout, pays with credit card, order is confirmed, and items are shipped.",
+    "OAuth2 flow for backend service",
+    "User flow of a grammar checker program",
+    "Database diagrams for a blog",
     "A customer visits an online store, adds items to cart, logs in, enters shipping address, pays, and receives confirmation email.",
-    "A customer places an online order for groceries. The system generates a confirmation email followed by a pick-up notification email to the store. An employee picks the order, calls the customer, and confirms the pick-up. The customer arrives, shows the email, and receives the order.",
-    "A customer buys a laptop online, adds it to their cart, enters promo code, pays via credit card, receives confirmation email, item is shipped."
+    "A customer buys a laptop online, adds it to their cart, enters promo code, pays via credit card, receives confirmation email, item is shipped.",
+    "Mindmap for researching rocket science"
 ];
 
 export default function Home() {
@@ -50,12 +50,10 @@ export default function Home() {
             throw new Error(response.statusText);
         }
 
-        let answer = await response.json();
-
-        const matched = answer.result.match(/```\n([\s\S]+?)```/g);
-        if (matched !== null && matched.length > 0) {
-            const content = matched[0].replace(/```/g, '');
-            setDiagram(content);
+        const answer = await response.json();
+        const diagram = answer.result.split("\n").filter((line: string) => !line.startsWith("```")).join("\n");
+        if (diagram.length && diagram !== "UNKNOWN_ERROR") {
+            setDiagram(diagram);
         }
         setLoading(false);
     };
