@@ -161,7 +161,7 @@ export default function Home() {
                 </div>
                 <p className={"text-left"}>
                     <span className='w-6 h-6 mr-1 rounded-full bg-slate-700 text-white text-center font-bold inline-block'>1</span> Enter your OpenAI API key <br/>
-                    <span className={"text-slate-500 text-sm"}><a className='text-blue-600 italic underline' target="_blank" href="https://platform.openai.com/account/api-keys">Your API Key</a> is needed to call OpenAI&rsquo;s API, we do not store your API key anywhere, even on this browser, so you&rsquo;ll have to enter this key everytime you enter the page. <a className='text-blue-600 italic underline' target="_blank" href="https://kingbazoka.typeform.com/to/gIq80bu7">Want to use SequenceGenius without API key?</a></span>
+                    <span className={"text-slate-500 text-sm"}><a className='text-blue-600 italic underline' target="_blank" href="https://platform.openai.com/account/api-keys">Your API Key</a> is needed to call OpenAI&rsquo;s API, we do not store your API key anywhere, even on this browser, so you&rsquo;ll have to enter this key everytime you enter the page. <a className='text-blue-600 italic underline' target="_blank" href="https://tally.so/r/woEkax">Want to use SequenceGenius without API key?</a></span>
                 </p>
                 <input 
                     value={apiKey}
