@@ -8,7 +8,7 @@ export default function Document() {
         <Main />
         <NextScript />
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script data-domain={"seq.ascii-draw.com"}  src={"/js/info.js"}></script>
+        <script data-domain={"sequencegenius.com"}  src={"/js/info.js"}></script>
       </body>
     </Html>
   )
