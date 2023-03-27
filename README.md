@@ -2,7 +2,7 @@
 
 Effortlessly generate sequence diagram from your ideas, with helps from AI.
 
-Try it online at: https://seq.ascii-draw.com/
+Try it online at: https://sequencegenius.com/
 
 ![](./metadata/screenshot.png)
 
